@@ -134,7 +134,7 @@ The generic model of such a capability list is a list of pairs of
 object identifiers and the permissions the subject has on the
 object(s) identified.
 
-~~~ CDDL
+~~~ cddl
 AIF-Generic<Toid, Tperm> = [* [Toid, Tperm]]
 ~~~
 {: #genaif title="Definition of Generic AIF"}
@@ -143,7 +143,7 @@ In a specific data model, the object identifier (`Toid`) will often be
 a text string, and the set of permissions (`Tperm`) will be represented
 by a bitset in turn represented as a number (see {{data-model}}).
 
-~~~ CDDL
+~~~ cddl
 AIF-Specific = AIF-Generic<tstr, uint>
 ~~~
 {: #specaif title="Likely shape of a specific AIF"}
@@ -161,8 +161,10 @@ parts of the URI that identify the server ("authority" in
 the "path-absolute" and "query" parts of the URI (URI "local-part" in
 this specification, as expressed by the Uri-Path and Uri-Query options
 in CoAP).  As a consequence, AIF MUST be used in a way that it is
-unambiguous who is the target (enforcement point) of these
-authorizations.
+clear who is the target (enforcement point) of these authorizations
+(note that there may be more than one target that the same
+authorization applies to, e.g., in a situation with homogeneous
+devices).
 
 For the permissions (`Tperm`), we simplify the model permissions to
 giving the subset of the CoAP methods permitted.  This model is
@@ -184,7 +186,9 @@ Limitations
 This simple information model only allows granting permissions for
 statically identifiable objects, e.g., URIs for the REST-specific
 instantiation.  One might be tempted to extend the model towards URI
-templates {{-uri-templates}}, however, that requires some considerations of
+templates {{-uri-templates}} (for instance, to open up an
+authorization for many parameter values as in
+ `/s/temp{?any*}`), however, that requires some considerations of
 the ease and unambiguity of matching a given URI against a set of
 templates in an AIF object.
 
@@ -264,7 +268,7 @@ In {{aif-cddl}}, a straightforward specification of the data model
 (including both the methods from {{-coap}} and the new ones from
 {{-patch}}, identified by the method code minus 1) is shown in CDDL {{-cddl}}:
 
-~~~~ CDDL
+~~~~ cddl
 AIF-REST = AIF-Generic<path, permissions>
 path = tstr   ; URI relative to enforcement point
 permissions = uint .bits methods
@@ -516,7 +520,8 @@ careful to:
 
 * ensure that the types used for `Toid` and `Tperm` provide the
   appropriate granularity so that application requirements on the
-  precision of the authorization information are fulfilled.
+  precision of the authorization information are fulfilled, and that
+  all parties understand `Toid`/`Tperm` pairs to signify the same operations.
 
 For the data formats, the security considerations of {{-json}} and
 {{-cbor}} apply.
