@@ -103,7 +103,7 @@ the explanatory examples as it is a good fit for Constrained Devices.
 The shape of data is specified in CDDL {{-cddl}}.
 Terminology for Constrained Devices is defined in {{-term}}.
 
-{::boilerplate bcp14+}
+{::boilerplate bcp14+-tagged}
 
 (Note that this document is itself informational, but it is discussing
 normative statements that MUST be put into concrete terms in each
@@ -528,11 +528,11 @@ For the data formats, the security considerations of {{-json}} and
 
 A generic implementation of AIF might implement just the basic REST
 model as per {{rest-model}}.  If it receives authorizations that
-include permissions that use the {{ext-rest-model}}, it should either
-reject the AIF data item entirely or it should act only on the
+include permissions that use the {{ext-rest-model}}, it needs to either
+reject the AIF data item entirely or act only on the
 permissions that it does understand.  In other words, the usual
-principle "everything is denied until it is explicitly allowed" should
-hold here as well.
+principle "everything is denied until it is explicitly allowed" needs
+to hold here as well.
 
 --- back
 
