@@ -4,8 +4,8 @@
 
 ACE Working Group                                             C. Bormann
 Internet-Draft                                    Universität Bremen TZI
-Intended status: Informational                               11 May 2021
-Expires: 12 November 2021
+Intended status: Informational                              24 June 2021
+Expires: 26 December 2021
 
 
            An Authorization Information Format (AIF) for ACE
@@ -57,7 +57,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 12 November 2021.
+   This Internet-Draft will expire on 26 December 2021.
 
 Copyright Notice
 
@@ -517,10 +517,10 @@ Table of Contents
 
    A generic implementation of AIF might implement just the basic REST
    model as per Section 2.1.  If it receives authorizations that include
-   permissions that use the Section 2.3, it should either reject the AIF
-   data item entirely or it should act only on the permissions that it
-   does understand.  In other words, the usual principle "everything is
-   denied until it is explicitly allowed" should hold here as well.
+   permissions that use the Section 2.3, it needs to either reject the
+   AIF data item entirely or act only on the permissions that it does
+   understand.  In other words, the usual principle "everything is
+   denied until it is explicitly allowed" needs to hold here as well.
 
 7.  References
 
@@ -559,9 +559,9 @@ Table of Contents
               H. Tschofenig, "Authentication and Authorization for
               Constrained Environments (ACE) using the OAuth 2.0
               Framework (ACE-OAuth)", Work in Progress, Internet-Draft,
-              draft-ietf-ace-oauth-authz-41, 6 May 2021,
+              draft-ietf-ace-oauth-authz-42, 8 June 2021,
               <https://datatracker.ietf.org/doc/html/draft-ietf-ace-
-              oauth-authz-41.txt>.
+              oauth-authz-42.txt>.
 
    [IANA.core-parameters]
               IANA, "Constrained RESTful Environments (CoRE)
@@ -623,10 +623,11 @@ Table of Contents
 
 Acknowledgements
 
-   Jim Schaad, Francesca Palombini, Olaf Bergmann, and Marco Tiloca
-   provided comments that shaped the direction of this document.  Alexey
-   Melnikov pointed out that there were gaps in the media type
-   specifications.
+   Jim Schaad, Francesca Palombini, Olaf Bergmann, Marco Tiloca, and
+   Christian Amsüss provided comments that shaped the direction of this
+   document.  Alexey Melnikov pointed out that there were gaps in the
+   media type specifications, and Loganaden Velvindron provided a
+   shepherd review with further comments.
 
 Author's Address
 
