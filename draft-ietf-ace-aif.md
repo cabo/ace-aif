@@ -104,11 +104,7 @@ the explanatory examples as it is a good fit for Constrained Devices.
 The shape of data is specified in CDDL {{-cddl}}.
 Terminology for Constrained Devices is defined in {{-term}}.
 
-{::boilerplate bcp14+-tagged}
-
-(Note that this document is itself informational, but it is discussing
-normative statements that MUST be put into concrete terms in each
-specification that makes use of this document.)
+{::boilerplate bcp14-tagged}
 
 The term "byte", abbreviated by "B", is used in its now customary
 sense as a synonym for "octet".
@@ -512,7 +508,7 @@ Security Considerations {#seccons}
 The security considerations of {{-coap}} apply.
 Some wider issues are discussed in {{-seccons}}.
 
-When applying these formats, the referencing specification must be
+When applying these formats, the referencing specification needs to be
 careful to:
 
 * ensure that the cryptographic armor employed around this format
