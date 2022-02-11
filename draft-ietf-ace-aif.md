@@ -539,6 +539,12 @@ permissions that it does understand.  In other words, the usual
 principle "everything is denied until it is explicitly allowed" needs
 to hold here as well.
 
+An implementation of the REST-specific Model With Dynamic Resource
+Creation {{ext-rest-model}} needs to carefully keep track of the
+dynamically created objects and the subjects to which the Dynamic-X
+permissions apply — both on the server side to enforce the permissions
+and on the client side to know which permissions are available.
+
 --- back
 
 Acknowledgements
