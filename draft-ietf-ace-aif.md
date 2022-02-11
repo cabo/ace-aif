@@ -2,7 +2,7 @@
 title: An Authorization Information Format (AIF) for ACE
 abbrev: ACE AIF
 docname: draft-ietf-ace-aif-latest
-# date: 2021-06-24
+# date: 2022-01-28
 
 stand_alone: true
 
@@ -10,13 +10,20 @@ ipr: trust200902
 area: Internet
 wg: ACE Working Group
 kw: Internet-Draft
-cat: info
+cat: std
+consensus: true
+submissiontype: IETF
 
 pi:
   toc: yes
   tocdepth: 4
   sortrefs: yes
   symrefs: yes
+
+venue:
+  group: Authentication and Authorization for Constrained Environments (ace)
+  mail: ace@ietf.org
+  github: cabo/ace-aif
 
 author:
       -
@@ -359,7 +366,7 @@ Required parameters:
     A value from the subregistry for `Toid`.
     Default value: "local-uri" (RFC XXXX).
 
-  * `Tperm`: the data type of a permission set for the the object
+  * `Tperm`: the data type of a permission set for the object
     identified via a `Toid`.
     A value from the subregistry for `Tperm`.
     Default value: "REST-method-set" (RFC XXXX).
@@ -419,7 +426,7 @@ Required parameters:
     A value from the subregistry for `Toid`.
     Default value: "local-uri" (RFC XXXX).
 
-  * `Tperm`: the data type of a permission set for the the object
+  * `Tperm`: the data type of a permission set for the object
     identified via a `Toid`.
     A value from the subregistry for `Tperm`.
     Default value: "REST-method-set" (RFC XXXX).
