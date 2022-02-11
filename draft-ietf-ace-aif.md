@@ -224,7 +224,7 @@ limitation mentioned in {{limitations}}.
 
 For a method X, the presence of a Dynamic-X permission means that the subject
 holds permission to exercise the method X on resources that have been
-returned by a Location-indicating mechanism to a request that the
+returned in a 2.01 (201) response by a Location-indicating mechanism to a request that the
 subject made to the resource listed (`/a/make-coffee` in the example
 shown in {{im-example-dynamic}},
 which might return the location of a resource that allows GET to find
@@ -357,6 +357,9 @@ Subtype name:
 : aif+cbor
 
 Required parameters:
+: none
+
+Optional parameters:
 : * `Toid`: the identifier for the object for which permissions are
     supplied.
     A value from the subregistry for `Toid`.
@@ -366,9 +369,6 @@ Required parameters:
     identified via a `Toid`.
     A value from the subregistry for `Tperm`.
     Default value: "REST-method-set" (RFC XXXX).
-
-Optional parameters:
-: none
 
 Encoding considerations:
 : binary (CBOR)
@@ -383,7 +383,8 @@ Published specification:
 : {{media-types}} of RFC XXXX
 
 Applications that use this media type:
-: No known applications currently use this media type.
+: Applications that need to convey structured authorization data for
+  identified resources, conveying sets of permissions.
 
 Fragment identifier considerations:
 : The syntax and semantics of fragment identifiers is as specified for
@@ -417,6 +418,9 @@ Subtype name:
 : aif+json
 
 Required parameters:
+: none
+
+Optional parameters:
 : * `Toid`: the identifier for the object for which permissions are
     supplied.
     A value from the subregistry for `Toid`.
@@ -426,9 +430,6 @@ Required parameters:
     identified via a `Toid`.
     A value from the subregistry for `Tperm`.
     Default value: "REST-method-set" (RFC XXXX).
-
-Optional parameters:
-: none
 
 Encoding considerations:
 : binary (JSON is UTF-8-encoded text)
@@ -443,7 +444,8 @@ Published specification:
 : {{media-types}} of RFC XXXX
 
 Applications that use this media type:
-: No known applications currently use this media type.
+: Applications that need to convey structured authorization data for
+  identified resources, conveying sets of permissions.
 
 Fragment identifier considerations:
 : The syntax and semantics of fragment identifiers is as specified for
