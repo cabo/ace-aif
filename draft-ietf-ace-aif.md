@@ -43,6 +43,7 @@ normative:
   I-D.ietf-httpbis-semantics: http-semantics
   RFC8126: ianacons
   RFC8610: cddl
+  RFC9165: cddlplus
 
 informative:
   RFC4949: gloss
@@ -101,7 +102,7 @@ Terminology
 This memo uses terms from {{-coap}} and {{-gloss}}; CoAP is used for
 the explanatory examples as it is a good fit for Constrained Devices.
 
-The shape of data is specified in CDDL {{-cddl}}.
+The shape of data is specified in CDDL {{-cddl}} {{-cddlplus}}.
 Terminology for Constrained Devices is defined in {{-term}}.
 
 {::boilerplate bcp14-tagged}
@@ -269,7 +270,8 @@ This data model could be interchanged in the JSON
 
 In {{aif-cddl}}, a straightforward specification of the data model
 (including both the methods from {{-coap}} and the new ones from
-{{-patch}}, identified by the method code minus 1) is shown in CDDL {{-cddl}}:
+{{-patch}}, identified by the method code minus 1) is shown in CDDL
+{{-cddl}} {{-cddlplus}}:
 
 ~~~~ cddl
 AIF-REST = AIF-Generic<path, permissions>
