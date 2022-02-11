@@ -176,7 +176,8 @@ summarized in {{im-example}}.
 {: #im-example title="An authorization instance in the AIF Information Model"}
 
 In this example, a device offers a temperature sensor `/s/temp` for
-read-only access and a LED actuator `/a/led` for read/write.
+read-only access, a LED actuator `/a/led` for read/write, and a
+`/dtls` resource for POST access.
 
 As will be seen in the data model ({{data-model}}), the representations
 of REST methods provided are limited to those that have a CoAP method
