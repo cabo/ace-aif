@@ -38,7 +38,9 @@ author:
         email: cabo@tzi.org
 
 normative:
+  RFC3986: uri
   RFC7252: coap
+  I-D.ietf-httpbis-semantics: http-semantics
   RFC8126: ianacons
   RFC8610: cddl
 
@@ -163,9 +165,10 @@ In the specific instantiation of the REST resources and the
 permissions on them, for the object identifiers (`Toid`), we
 use the URI of a resource on a CoAP server.  More specifically, the
 parts of the URI that identify the server ("authority" in
-{{?RFC3986}}) are considered the realm of the authentication mechanism
-(which are handled in the cryptographic armor); we therefore focus on
-the "path-absolute" and "query" parts of the URI (URI "local-part" in
+{{-uri}}) are what are authenticated during REST resource access ({{Section
+4.2.2 of -http-semantics}} and {{Section 6.2 of RFC7252}}), they
+naturally fall into the realm handled by the cryptographic armor); we therefore focus on
+the "path" ("path-abempty") and "query" parts of the URI (URI "local-part" in
 this specification, as expressed by the Uri-Path and Uri-Query options
 in CoAP).  As a consequence, AIF MUST be used in a way that it is
 clear who is the target (enforcement point) of these authorizations
@@ -215,12 +218,13 @@ The extended REST-specific model addresses the need to provide defined
 access to dynamic resources that were created by the subject itself,
 specifically, a resource that is made known to the subject by
 providing Location-* options in a CoAP response or using the Location
-header field in HTTP {{?RFC7231}} (the Location-indicating mechanisms).
+header field in HTTP {{-http-semantics}} (the Location-indicating mechanisms).
 (The concept is somewhat comparable to "ACL inheritance" in NFSv4
 {{?RFC8881}}, except that it does not use a containment relationship
 but the fact that the dynamic resource was created from a resource to
 which the subject had access.)
-In other words, it addresses the third limitation mentioned in {{limitations}}.
+In other words, it addresses an important subset of the third
+limitation mentioned in {{limitations}}.
 
 | local-part     | Permission Set                    |
 | /a/make-coffee | POST, Dynamic-GET, Dynamic-DELETE |
