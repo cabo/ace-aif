@@ -263,9 +263,9 @@ This data model could be interchanged in the JSON
 {{-json}} representation given in {{dm-json}}.
 
 ~~~json
-[["/s/temp", 1], ["/a/led", 5], ["/dtls", 2]]
+[["/s/temp",1],["/a/led",5],["/dtls",2]]
 ~~~
-{: #dm-json title="An authorization instance encoded in JSON (46 bytes)"}
+{: #dm-json title="An authorization instance encoded in JSON (40 bytes)"}
 
 In {{aif-cddl}}, a straightforward specification of the data model
 (including both the methods from {{-coap}} and the new ones from
@@ -294,9 +294,9 @@ methods = &(
 ~~~~
 {: #aif-cddl title="AIF in CDDL"}
 
-A representation of this information in CBOR
-{{-cbor}} is given in {{dm-cbor}}; again, several
-optimizations/improvements are possible.
+For the information shown in {{im-example}} and {{dm-json}}, a
+representation in CBOR {{-cbor}} is given in {{dm-cbor}}; again,
+several optimizations/improvements are possible.
 
 ~~~hex-dump
 83                        # array(3)
