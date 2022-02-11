@@ -514,17 +514,25 @@ Security Considerations {#seccons}
 The security considerations of {{-coap}} apply.
 Some wider issues are discussed in {{-seccons}}.
 
+The semantics of the authorization information defined in this
+documents are that of an *allow-list*:
+everything is denied until it is explicitly allowed.
+
 When applying these formats, the referencing specification needs to be
 careful to:
 
 * ensure that the cryptographic armor employed around this format
-  fulfills the security objectives, and that the armor or some
+  fulfills the referencing specification's security objectives, and that the armor or some
   additional information included in it with the AIF information
-  unambiguously identifies the subject to which the authorizations
-  shall apply, and
+  (1) unambiguously identifies the subject to which the authorizations
+  shall apply and provides (2) any context information needed to derive the
+  identity of the object to which authorization is being granted
+  from the object identifiers (such as, for
+  the data models defined in the present specification, the scheme and
+  authority information that is used to construct the full URI), and
 
 * ensure that the types used for `Toid` and `Tperm` provide the
-  appropriate granularity so that application requirements on the
+  appropriate granularity and precision so that application requirements on the
   precision of the authorization information are fulfilled, and that
   all parties understand `Toid`/`Tperm` pairs to signify the same operations.
 
@@ -533,11 +541,12 @@ For the data formats, the security considerations of {{-json}} and
 
 A plain implementation of AIF might implement just the basic REST
 model as per {{rest-model}}.  If it receives authorizations that
-include permissions that use the {{ext-rest-model}}, it needs to either
+include permissions that use the REST-specific Model With Dynamic
+Resource Creation {{ext-rest-model}}, it needs to either
 reject the AIF data item entirely or act only on the
-permissions that it does understand.  In other words, the usual
-principle "everything is denied until it is explicitly allowed" needs
-to hold here as well.
+permissions that it does understand.
+In other words, the semantics underlying an allow-list as discussed
+above need to hold here as well.
 
 An implementation of the REST-specific Model With Dynamic Resource
 Creation {{ext-rest-model}} needs to carefully keep track of the
