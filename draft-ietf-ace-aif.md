@@ -121,9 +121,9 @@ that data (as opposed to the cryptographic armor around it).
 For the purposes of this specification, the underlying access control model
 will be that of an access matrix, which gives a set of permissions for
 each possible combination of a subject and an object.
-We do not concern the AIF format with the subject for which the
-AIF data item is issued, so we are focusing the AIF data item on a single row in the
-access matrix (such a row traditionally is also called a capability list).
+We are focusing the AIF data item on a single row in the access matrix
+(such a row traditionally is also called a capability list), without
+concern to the subject for which the data item is issued.
 As a consequence, AIF MUST be used in a way that the subject of the
 authorizations is unambiguously identified (e.g., as part of the armor
 around it).
@@ -137,7 +137,8 @@ AIF-Generic<Toid, Tperm> = [* [Toid, Tperm]]
 ~~~
 {: #genaif title="Definition of Generic AIF"}
 
-In a specific data model, the object identifier (`Toid`) will often be
+In a specific data model (such as the one also specified in
+this document), the object identifier (`Toid`) will often be
 a text string, and the set of permissions (`Tperm`) will be represented
 by a bitset in turn represented as a number (see {{data-model}}).
 
@@ -165,9 +166,9 @@ clear who is the target (enforcement point) of these authorizations
 authorization applies to, e.g., in a situation with homogeneous
 devices).
 
-For the permissions (`Tperm`), we simplify the model permissions to
-giving the subset of the CoAP methods permitted.  This model is
-summarized in {{im-example}}.
+For the permissions (`Tperm`), we use a simple permissions model that
+lists the subset of the REST (CoAP or HTTP) methods permitted.
+This model is summarized in {{im-example}}.
 
 | local-part | Permission Set |
 | /s/temp    | GET            |
