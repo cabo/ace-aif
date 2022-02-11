@@ -177,6 +177,10 @@ summarized in {{im-example}}.
 In this example, a device offers a temperature sensor `/s/temp` for
 read-only access and a LED actuator `/a/led` for read/write.
 
+As will be seen in the data model ({{data-model}}), the representations
+of REST methods provided are limited to those that have a CoAP method
+number assigned; an extension to the model may be necessary to represent
+permissions for exotic HTTP methods.
 
 Limitations
 -----------
