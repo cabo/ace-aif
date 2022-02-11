@@ -143,7 +143,7 @@ by a bitset in turn represented as a number (see {{data-model}}).
 ~~~ cddl
 AIF-Specific = AIF-Generic<tstr, uint>
 ~~~
-{: #specaif title="Likely shape of a specific AIF"}
+{: #specaif title="Commonly used shape of a specific AIF"}
 
 
 REST-specific Model {#rest-model}
@@ -238,7 +238,7 @@ Data Model
 Different data model specializations can be defined for the generic
 information model given above.
 
-In this section, we will give the data model for basic REST
+In this section, we will give the data model for simple REST
 authorization as per {{rest-model}} and {{ext-rest-model}}.
 As discussed, in this case the object identifier is specialized as a text string
 giving a relative URI (local-part as absolute path on the server
@@ -525,7 +525,7 @@ careful to:
 For the data formats, the security considerations of {{-json}} and
 {{-cbor}} apply.
 
-A generic implementation of AIF might implement just the basic REST
+A plain implementation of AIF might implement just the basic REST
 model as per {{rest-model}}.  If it receives authorizations that
 include permissions that use the {{ext-rest-model}}, it needs to either
 reject the AIF data item entirely or act only on the
