@@ -204,10 +204,11 @@ resources that are specific to a subject, e.g., that the subject
 created itself by previous operations (PUT, POST, or PATCH/iPATCH {{-patch}}) or that were
 specifically created for the subject by others.
 
-Extended REST-specific Model {#ext-rest-model}
+REST-specific Model With Dynamic Resource Creation {#ext-rest-model}
 ----------------------------
 
-The extended REST-specific model addresses the need to provide defined
+The REST-specific Model With Dynamic Resource Creation addresses the
+need to provide defined
 access to dynamic resources that were created by the subject itself,
 specifically, a resource that is made known to the subject by
 providing Location-* options in a CoAP response or using the Location
@@ -234,7 +235,8 @@ operation).
 
 Since the use of the extension defined in this section can be detected
 by the mentioning of the Dynamic-X permissions, there is no need for
-another explicit switch between the basic and the extended model; the
+another explicit switch between the basic and the model extended by
+dynamic resource creation; the
 extended model is always presumed once a Dynamic-X permission is present.
 
 Data Model
