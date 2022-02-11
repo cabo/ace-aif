@@ -2,7 +2,7 @@
 title: An Authorization Information Format (AIF) for ACE
 abbrev: ACE AIF
 docname: draft-ietf-ace-aif-latest
-# date: 2022-01-28
+# date: 2022-02-11
 
 stand_alone: true
 
@@ -59,49 +59,41 @@ informative:
 
 --- abstract
 
-Constrained Devices as they are used in the "Internet of Things" need
-security.
-One important element of this security is that devices in the Internet
-of Things need to be able to decide which operations requested of them
-should be considered authorized, need to ascertain that the
-authorization to request the operation does apply to the actual
-requester,
-and need to ascertain that other devices they place
-requests on are the ones they intended.
+[^intro1-]
+
+[^intro1-]: Constrained Devices as they are used in the "Internet of Things" need
+    security.
+    One important element of this security is that devices in the Internet
+    of Things need to be able to decide which operations requested of them
+    should be considered authorized, need to ascertain that the
+    authorization to request the operation does apply to the actual
+    requester as authenticated,
+    and need to ascertain that other devices they make
+    requests of are the ones they intended.
 
 To transfer detailed authorization information from an authorization manager
 (such as an ACE-OAuth Authorization Server) to a device, a
 compact representation format is needed.
-This document provides a suggestion for such a format, the
-Authorization Information Format (AIF).
-AIF is defined both as a general structure that can be used for many
-different applications and as a specific refinement that describes
-REST resources (potentially dynamically created) and the permissions on them.
+[^intro2-]
+
+[^intro2-]: This document defines such a format, the
+    Authorization Information Format (AIF).
+    AIF is defined both as a general structure that can be used for many
+    different applications and
+    as a specific instantiation tailored to REST resources and the permissions
+    on them, including some provision for dynamically created resources.
 
 --- middle
 
 Introduction
 ============
 
-
-Constrained Devices as they are used in the "Internet of Things" need
-security.
-One important element of this security is that devices in the Internet
-of Things need to be able to decide which operations requested of them
-should be considered authorized, need to ascertain that the
-authorization to request the operation does apply to the actual
-requester,
-and need to ascertain that other devices they place
-requests on are the ones they intended.
+[^intro1-]
 
 To transfer detailed authorization information from an authorization manager
 (such as an ACE-OAuth Authorization Server {{-ace-oauth}}) to a device, a
 compact representation format is needed.
-This document provides a suggestion for such a format, the
-Authorization Information Format (AIF).
-AIF is defined both as a general structure that can be used for many
-different applications and as a specific refinement that describes
-REST resources (potentially dynamically created) and the permissions on them.
+[^intro2-]
 
 Terminology
 -----------
