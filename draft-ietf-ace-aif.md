@@ -2,7 +2,7 @@
 title: An Authorization Information Format (AIF) for ACE
 abbrev: ACE AIF
 docname: draft-ietf-ace-aif-latest
-# date: 2022-01-28
+# date: 2022-02-11
 
 stand_alone: true
 
@@ -38,9 +38,12 @@ author:
         email: cabo@tzi.org
 
 normative:
+  RFC3986: uri
   RFC7252: coap
+  I-D.ietf-httpbis-semantics: http-semantics
   RFC8126: ianacons
   RFC8610: cddl
+  RFC9165: cddlplus
 
 informative:
   RFC4949: gloss
@@ -57,49 +60,41 @@ informative:
 
 --- abstract
 
-Constrained Devices as they are used in the "Internet of Things" need
-security.
-One important element of this security is that devices in the Internet
-of Things need to be able to decide which operations requested of them
-should be considered authorized, need to ascertain that the
-authorization to request the operation does apply to the actual
-requester,
-and need to ascertain that other devices they place
-requests on are the ones they intended.
+[^intro1-]
+
+[^intro1-]: Constrained Devices as they are used in the "Internet of Things" need
+    security.
+    One important element of this security is that devices in the Internet
+    of Things need to be able to decide which operations requested of them
+    should be considered authorized, need to ascertain that the
+    authorization to request the operation does apply to the actual
+    requester as authenticated,
+    and need to ascertain that other devices they make
+    requests of are the ones they intended.
 
 To transfer detailed authorization information from an authorization manager
 (such as an ACE-OAuth Authorization Server) to a device, a
 compact representation format is needed.
-This document provides a suggestion for such a format, the
-Authorization Information Format (AIF).
-AIF is defined both as a general structure that can be used for many
-different applications and as a specific refinement that describes
-REST resources (potentially dynamically created) and the permissions on them.
+[^intro2-]
+
+[^intro2-]: This document defines such a format, the
+    Authorization Information Format (AIF).
+    AIF is defined both as a general structure that can be used for many
+    different applications and
+    as a specific instantiation tailored to REST resources and the permissions
+    on them, including some provision for dynamically created resources.
 
 --- middle
 
 Introduction
 ============
 
-
-Constrained Devices as they are used in the "Internet of Things" need
-security.
-One important element of this security is that devices in the Internet
-of Things need to be able to decide which operations requested of them
-should be considered authorized, need to ascertain that the
-authorization to request the operation does apply to the actual
-requester,
-and need to ascertain that other devices they place
-requests on are the ones they intended.
+[^intro1-]
 
 To transfer detailed authorization information from an authorization manager
 (such as an ACE-OAuth Authorization Server {{-ace-oauth}}) to a device, a
 compact representation format is needed.
-This document provides a suggestion for such a format, the
-Authorization Information Format (AIF).
-AIF is defined both as a general structure that can be used for many
-different applications and as a specific refinement that describes
-REST resources (potentially dynamically created) and the permissions on them.
+[^intro2-]
 
 Terminology
 -----------
@@ -107,14 +102,10 @@ Terminology
 This memo uses terms from {{-coap}} and {{-gloss}}; CoAP is used for
 the explanatory examples as it is a good fit for Constrained Devices.
 
-The shape of data is specified in CDDL {{-cddl}}.
+The shape of data is specified in CDDL {{-cddl}} {{-cddlplus}}.
 Terminology for Constrained Devices is defined in {{-term}}.
 
-{::boilerplate bcp14+-tagged}
-
-(Note that this document is itself informational, but it is discussing
-normative statements that MUST be put into concrete terms in each
-specification that makes use of this document.)
+{::boilerplate bcp14-tagged}
 
 The term "byte", abbreviated by "B", is used in its now customary
 sense as a synonym for "octet".
@@ -130,9 +121,9 @@ that data (as opposed to the cryptographic armor around it).
 For the purposes of this specification, the underlying access control model
 will be that of an access matrix, which gives a set of permissions for
 each possible combination of a subject and an object.
-We do not concern the AIF format with the subject for which the
-AIF data item is issued, so we are focusing the AIF data item on a single row in the
-access matrix (such a row traditionally is also called a capability list).
+We are focusing the AIF data item on a single row in the access matrix
+(such a row traditionally is also called a capability list), without
+concern to the subject for which the data item is issued.
 As a consequence, AIF MUST be used in a way that the subject of the
 authorizations is unambiguously identified (e.g., as part of the armor
 around it).
@@ -146,14 +137,15 @@ AIF-Generic<Toid, Tperm> = [* [Toid, Tperm]]
 ~~~
 {: #genaif title="Definition of Generic AIF"}
 
-In a specific data model, the object identifier (`Toid`) will often be
+In a specific data model (such as the one also specified in
+this document), the object identifier (`Toid`) will often be
 a text string, and the set of permissions (`Tperm`) will be represented
 by a bitset in turn represented as a number (see {{data-model}}).
 
 ~~~ cddl
 AIF-Specific = AIF-Generic<tstr, uint>
 ~~~
-{: #specaif title="Likely shape of a specific AIF"}
+{: #specaif title="Commonly used shape of a specific AIF"}
 
 
 REST-specific Model {#rest-model}
@@ -161,11 +153,12 @@ REST-specific Model {#rest-model}
 
 In the specific instantiation of the REST resources and the
 permissions on them, for the object identifiers (`Toid`), we
-use the URI of a resource on a CoAP server.  More specifically, the
+use the URI of a resource on a CoAP server.  More specifically, since the
 parts of the URI that identify the server ("authority" in
-{{?RFC3986}}) are considered the realm of the authentication mechanism
-(which are handled in the cryptographic armor); we therefore focus on
-the "path-absolute" and "query" parts of the URI (URI "local-part" in
+{{-uri}}) are what are authenticated during REST resource access ({{Section
+4.2.2 of -http-semantics}} and {{Section 6.2 of RFC7252}}), they
+naturally fall into the realm handled by the cryptographic armor); we therefore focus on
+the "path" ("path-abempty") and "query" parts of the URI (URI "local-part" in
 this specification, as expressed by the Uri-Path and Uri-Query options
 in CoAP).  As a consequence, AIF MUST be used in a way that it is
 clear who is the target (enforcement point) of these authorizations
@@ -173,9 +166,9 @@ clear who is the target (enforcement point) of these authorizations
 authorization applies to, e.g., in a situation with homogeneous
 devices).
 
-For the permissions (`Tperm`), we simplify the model permissions to
-giving the subset of the CoAP methods permitted.  This model is
-summarized in {{im-example}}.
+For the permissions (`Tperm`), we use a simple permissions model that
+lists the subset of the REST (CoAP or HTTP) methods permitted.
+This model is summarized in {{im-example}}.
 
 | local-part | Permission Set |
 | /s/temp    | GET            |
@@ -184,8 +177,13 @@ summarized in {{im-example}}.
 {: #im-example title="An authorization instance in the AIF Information Model"}
 
 In this example, a device offers a temperature sensor `/s/temp` for
-read-only access and a LED actuator `/a/led` for read/write.
+read-only access, a LED actuator `/a/led` for read/write, and a
+`/dtls` resource for POST access.
 
+As will be seen in the data model ({{data-model}}), the representations
+of REST methods provided are limited to those that have a CoAP method
+number assigned; an extension to the model may be necessary to represent
+permissions for exotic HTTP methods.
 
 Limitations
 -----------
@@ -208,19 +206,21 @@ resources that are specific to a subject, e.g., that the subject
 created itself by previous operations (PUT, POST, or PATCH/iPATCH {{-patch}}) or that were
 specifically created for the subject by others.
 
-Extended REST-specific Model {#ext-rest-model}
+REST-specific Model With Dynamic Resource Creation {#ext-rest-model}
 ----------------------------
 
-The extended REST-specific model addresses the need to provide defined
+The REST-specific Model With Dynamic Resource Creation addresses the
+need to provide defined
 access to dynamic resources that were created by the subject itself,
 specifically, a resource that is made known to the subject by
 providing Location-* options in a CoAP response or using the Location
-header field in HTTP {{?RFC7231}} (the Location-indicating mechanisms).
+header field in HTTP {{-http-semantics}} (the Location-indicating mechanisms).
 (The concept is somewhat comparable to "ACL inheritance" in NFSv4
 {{?RFC8881}}, except that it does not use a containment relationship
 but the fact that the dynamic resource was created from a resource to
 which the subject had access.)
-In other words, it addresses the third limitation mentioned in {{limitations}}.
+In other words, it addresses an important subset of the third
+limitation mentioned in {{limitations}}.
 
 | local-part     | Permission Set                    |
 | /a/make-coffee | POST, Dynamic-GET, Dynamic-DELETE |
@@ -228,7 +228,7 @@ In other words, it addresses the third limitation mentioned in {{limitations}}.
 
 For a method X, the presence of a Dynamic-X permission means that the subject
 holds permission to exercise the method X on resources that have been
-returned by a Location-indicating mechanism to a request that the
+returned in a 2.01 (201) response by a Location-indicating mechanism to a request that the
 subject made to the resource listed (`/a/make-coffee` in the example
 shown in {{im-example-dynamic}},
 which might return the location of a resource that allows GET to find
@@ -237,7 +237,8 @@ operation).
 
 Since the use of the extension defined in this section can be detected
 by the mentioning of the Dynamic-X permissions, there is no need for
-another explicit switch between the basic and the extended model; the
+another explicit switch between the basic and the model extended by
+dynamic resource creation; the
 extended model is always presumed once a Dynamic-X permission is present.
 
 Data Model
@@ -246,7 +247,7 @@ Data Model
 Different data model specializations can be defined for the generic
 information model given above.
 
-In this section, we will give the data model for basic REST
+In this section, we will give the data model for simple REST
 authorization as per {{rest-model}} and {{ext-rest-model}}.
 As discussed, in this case the object identifier is specialized as a text string
 giving a relative URI (local-part as absolute path on the server
@@ -267,13 +268,14 @@ This data model could be interchanged in the JSON
 {{-json}} representation given in {{dm-json}}.
 
 ~~~json
-[["/s/temp", 1], ["/a/led", 5], ["/dtls", 2]]
+[["/s/temp",1],["/a/led",5],["/dtls",2]]
 ~~~
-{: #dm-json title="An authorization instance encoded in JSON (46 bytes)"}
+{: #dm-json title="An authorization instance encoded in JSON (40 bytes)"}
 
 In {{aif-cddl}}, a straightforward specification of the data model
 (including both the methods from {{-coap}} and the new ones from
-{{-patch}}, identified by the method code minus 1) is shown in CDDL {{-cddl}}:
+{{-patch}}, identified by the method code minus 1) is shown in CDDL
+{{-cddl}} {{-cddlplus}}:
 
 ~~~~ cddl
 AIF-REST = AIF-Generic<path, permissions>
@@ -298,9 +300,9 @@ methods = &(
 ~~~~
 {: #aif-cddl title="AIF in CDDL"}
 
-A representation of this information in CBOR
-{{-cbor}} is given in {{dm-cbor}}; again, several
-optimizations/improvements are possible.
+For the information shown in {{im-example}} and {{dm-json}}, a
+representation in CBOR {{-cbor}} is given in {{dm-cbor}}; again,
+several optimizations/improvements are possible.
 
 ~~~hex-dump
 83                        # array(3)
@@ -361,6 +363,9 @@ Subtype name:
 : aif+cbor
 
 Required parameters:
+: none
+
+Optional parameters:
 : * `Toid`: the identifier for the object for which permissions are
     supplied.
     A value from the subregistry for `Toid`.
@@ -370,9 +375,6 @@ Required parameters:
     identified via a `Toid`.
     A value from the subregistry for `Tperm`.
     Default value: "REST-method-set" (RFC XXXX).
-
-Optional parameters:
-: none
 
 Encoding considerations:
 : binary (CBOR)
@@ -387,7 +389,8 @@ Published specification:
 : {{media-types}} of RFC XXXX
 
 Applications that use this media type:
-: No known applications currently use this media type.
+: Applications that need to convey structured authorization data for
+  identified resources, conveying sets of permissions.
 
 Fragment identifier considerations:
 : The syntax and semantics of fragment identifiers is as specified for
@@ -421,6 +424,9 @@ Subtype name:
 : aif+json
 
 Required parameters:
+: none
+
+Optional parameters:
 : * `Toid`: the identifier for the object for which permissions are
     supplied.
     A value from the subregistry for `Toid`.
@@ -430,9 +436,6 @@ Required parameters:
     identified via a `Toid`.
     A value from the subregistry for `Tperm`.
     Default value: "REST-method-set" (RFC XXXX).
-
-Optional parameters:
-: none
 
 Encoding considerations:
 : binary (JSON is UTF-8-encoded text)
@@ -447,7 +450,8 @@ Published specification:
 : {{media-types}} of RFC XXXX
 
 Applications that use this media type:
-: No known applications currently use this media type.
+: Applications that need to convey structured authorization data for
+  identified resources, conveying sets of permissions.
 
 Fragment identifier considerations:
 : The syntax and semantics of fragment identifiers is as specified for
@@ -516,30 +520,45 @@ Security Considerations {#seccons}
 The security considerations of {{-coap}} apply.
 Some wider issues are discussed in {{-seccons}}.
 
-When applying these formats, the referencing specification must be
+The semantics of the authorization information defined in this
+documents are that of an *allow-list*:
+everything is denied until it is explicitly allowed.
+
+When applying these formats, the referencing specification needs to be
 careful to:
 
 * ensure that the cryptographic armor employed around this format
-  fulfills the security objectives, and that the armor or some
+  fulfills the referencing specification's security objectives, and that the armor or some
   additional information included in it with the AIF information
-  unambiguously identifies the subject to which the authorizations
-  shall apply, and
+  (1) unambiguously identifies the subject to which the authorizations
+  shall apply and provides (2) any context information needed to derive the
+  identity of the object to which authorization is being granted
+  from the object identifiers (such as, for
+  the data models defined in the present specification, the scheme and
+  authority information that is used to construct the full URI), and
 
 * ensure that the types used for `Toid` and `Tperm` provide the
-  appropriate granularity so that application requirements on the
+  appropriate granularity and precision so that application requirements on the
   precision of the authorization information are fulfilled, and that
   all parties understand `Toid`/`Tperm` pairs to signify the same operations.
 
 For the data formats, the security considerations of {{-json}} and
 {{-cbor}} apply.
 
-A generic implementation of AIF might implement just the basic REST
+A plain implementation of AIF might implement just the basic REST
 model as per {{rest-model}}.  If it receives authorizations that
-include permissions that use the {{ext-rest-model}}, it needs to either
+include permissions that use the REST-specific Model With Dynamic
+Resource Creation {{ext-rest-model}}, it needs to either
 reject the AIF data item entirely or act only on the
-permissions that it does understand.  In other words, the usual
-principle "everything is denied until it is explicitly allowed" needs
-to hold here as well.
+permissions that it does understand.
+In other words, the semantics underlying an allow-list as discussed
+above need to hold here as well.
+
+An implementation of the REST-specific Model With Dynamic Resource
+Creation {{ext-rest-model}} needs to carefully keep track of the
+dynamically created objects and the subjects to which the Dynamic-X
+permissions apply — both on the server side to enforce the permissions
+and on the client side to know which permissions are available.
 
 --- back
 
