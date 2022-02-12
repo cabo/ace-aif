@@ -153,7 +153,7 @@ REST-specific Model {#rest-model}
 
 In the specific instantiation of the REST resources and the
 permissions on them, for the object identifiers (`Toid`), we
-use the URI of a resource on a CoAP server.  More specifically, the
+use the URI of a resource on a CoAP server.  More specifically, since the
 parts of the URI that identify the server ("authority" in
 {{-uri}}) are what are authenticated during REST resource access ({{Section
 4.2.2 of -http-semantics}} and {{Section 6.2 of RFC7252}}), they
