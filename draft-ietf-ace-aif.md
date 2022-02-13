@@ -73,7 +73,7 @@ of a specific instantiation of that format for use with REST resources
 identified by URI path.
 
 [^intro1-]: Constrained Devices as they are used in the "Internet of Things" need
-    security.
+    security in order to operate correctly and prevent misuse.
     One important element of this security is that devices in the Internet
     of Things need to be able to decide which operations requested of them
     should be considered authorized, need to ascertain that the
