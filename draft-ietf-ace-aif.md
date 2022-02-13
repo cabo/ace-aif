@@ -2,7 +2,7 @@
 title: An Authorization Information Format (AIF) for ACE
 abbrev: ACE AIF
 docname: draft-ietf-ace-aif-latest
-# date: 2022-02-11
+# date: 2022-02-12
 
 stand_alone: true
 
@@ -587,6 +587,8 @@ direction of this document.
 {{{Alexey Melnikov}}} pointed out that there were gaps in the media
 type specifications, and {{{Loganaden Velvindron}}} provided a shepherd
 review with further comments.
+{{{Benjamin Kaduk}}} provided an extensive review as responsible Area
+Director, and indeed is responsible for much improvement in the document.
 
 --- fluff
 
