@@ -60,7 +60,17 @@ informative:
 
 --- abstract
 
-[^intro1-]
+Information about which entities are authorized to perform what
+operations on which constituents of other entities is a crucial
+component of producing an overall system that is secure.  Conveying
+precise authorization information is especially critical in highly
+automated systems with large numbers of entities, such as the
+"Internet of Things".
+
+This specification provides a generic information model and format for
+representing such authorization information, as well as two variants
+of a specific instantiation of that format for use with REST resources
+identified by URI path.
 
 [^intro1-]: Constrained Devices as they are used in the "Internet of Things" need
     security.
@@ -71,11 +81,6 @@ informative:
     requester as authenticated,
     and need to ascertain that other devices they make
     requests of are the ones they intended.
-
-To transfer detailed authorization information from an authorization manager
-(such as an ACE-OAuth Authorization Server) to a device, a
-compact representation format is needed.
-[^intro2-]
 
 [^intro2-]: This document defines such a format, the
     Authorization Information Format (AIF).
