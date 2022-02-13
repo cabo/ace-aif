@@ -57,6 +57,8 @@ informative:
   RFC8576: seccons
   RFC6570: uri-templates
   RFC7228: term
+  IANA.core-parameters:
+  IANA.media-type-sub-parameters:
 
 --- abstract
 
@@ -346,6 +348,11 @@ and/or `Tperm` is expected to request these as media type parameters
 IANA Considerations
 ===================
 
+[^replace-xxxx]
+
+[^replace-xxxx]: RFC Ed.: throughout this section, please replace RFC
+      XXXX with the RFC number of this specification and remove this note.
+
 Media Types
 -----------
 
@@ -355,8 +362,6 @@ IANA is requested to add the following Media-Types to the "Media Types" registry
 | aif+cbor | application/aif+cbor | RFC XXXX, {{media-types}} |
 | aif+json | application/aif+json | RFC XXXX, {{media-types}} |
 {: align="left"}
-
-// RFC Ed.: please replace RFC XXXX with this RFC number and remove this note.
 
 For `application/aif+cbor`:
 
@@ -373,12 +378,12 @@ Required parameters:
 Optional parameters:
 : * `Toid`: the identifier for the object for which permissions are
     supplied.
-    A value from the subregistry for `Toid`.
+    A value from the media-type parameter sub-registry for `Toid`.
     Default value: "local-uri" (RFC XXXX).
 
   * `Tperm`: the data type of a permission set for the object
     identified via a `Toid`.
-    A value from the subregistry for `Tperm`.
+    A value from the media-type parameter sub-registry for `Tperm`.
     Default value: "REST-method-set" (RFC XXXX).
 
 Encoding considerations:
@@ -434,12 +439,12 @@ Required parameters:
 Optional parameters:
 : * `Toid`: the identifier for the object for which permissions are
     supplied.
-    A value from the subregistry for `Toid`.
+    A value from the media-type parameter sub-registry for `Toid`.
     Default value: "local-uri" (RFC XXXX).
 
   * `Tperm`: the data type of a permission set for the object
     identified via a `Toid`.
-    A value from the subregistry for `Tperm`.
+    A value from the media-type parameter sub-registry for `Tperm`.
     Default value: "REST-method-set" (RFC XXXX).
 
 Encoding considerations:
@@ -484,26 +489,27 @@ Provisional registration:
 Registries
 ----------
 
-IANA is requested to create a registry for AIF with two sub-registries for `Toid` and `Tperm`,
-populated with:
+IANA is requested to create a sub-registry for application/aif+cbor
+and application/aif+json within {{IANA.media-type-sub-parameters}} for
+the two media-type parameters `Toid` and `Tperm`, populated with:
 
-| Subregistry | name            | Description/Specification                                |
-|-------------|-----------------|----------------------------------------------------------|
-| Toid        | local-part      | local-part of URI as specified in RFC XXXX               |
-| Tperm       | REST-method-set | set of REST methods represented as specified in RFC XXXX |
+| Parameter | name            | Description/Specification       | Reference |
+|-----------+-----------------+---------------------------------+-----------|
+| Toid      | local-part      | local-part of URI               | RFC XXXX  |
+| Tperm     | REST-method-set | set of REST methods represented | RFC XXXX  |
+{: align="left"}
 
 The registration policy is Specification required {{-ianacons}}.
 The designated expert will engage with the submitter to ascertain the
 requirements of this document are addressed.
 
-// RFC Ed.: please replace RFC XXXX with this RFC number and remove this note.
 
 Content-Format
 --------------
 
 IANA is requested to register Content-Format numbers in the "CoAP
-Content-Formats" subregistry, within the "Constrained RESTful
-Environments (CoRE) Parameters" Registry {{?IANA.core-parameters}}, as
+Content-Formats" sub-registry, within the "Constrained RESTful
+Environments (CoRE) Parameters" Registry {{IANA.core-parameters}}, as
 follows:
 
 | Media Type           | Content Coding | ID   | Reference |
@@ -512,7 +518,6 @@ follows:
 {: align="left"}
 
 // RFC Ed.: please replace TBD1 and TBD2 with assigned IDs and remove this note.
-// RFC Ed.: please replace RFC XXXX with this RFC number and remove this note.
 
 Note that applications that register `Toid` and `Tperm` values are
 encouraged to also register Content-Formats for the relevant
