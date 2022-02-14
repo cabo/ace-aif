@@ -2,7 +2,7 @@
 title: An Authorization Information Format (AIF) for ACE
 abbrev: ACE AIF
 docname: draft-ietf-ace-aif-latest
-# date: 2022-02-12
+# date: 2022-02-14
 
 stand_alone: true
 
