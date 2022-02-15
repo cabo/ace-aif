@@ -164,7 +164,7 @@ use the URI of a resource on a CoAP server.  More specifically, since the
 parts of the URI that identify the server ("authority" in
 {{-uri}}) are what are authenticated during REST resource access ({{Section
 4.2.2 of -http-semantics}} and {{Section 6.2 of RFC7252}}), they
-naturally fall into the realm handled by the cryptographic armor); we therefore focus on
+naturally fall into the realm handled by the cryptographic armor; we therefore focus on
 the "path" ("path-abempty") and "query" parts of the URI (URI "local-part" in
 this specification, as expressed by the Uri-Path and Uri-Query options
 in CoAP).  As a consequence, AIF MUST be used in a way that it is
