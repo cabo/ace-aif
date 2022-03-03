@@ -106,7 +106,7 @@ compact representation format is needed.
 Terminology
 -----------
 
-This memo uses terms from {{-coap}} and {{-gloss}}; CoAP is used for
+This memo uses terms from CoAP {{-coap}} and the Internet Security Glossary {{-gloss}}; CoAP is used for
 the explanatory examples as it is a good fit for Constrained Devices.
 
 The shape of data is specified in CDDL {{-cddl}} {{-cddlplus}}.
@@ -200,7 +200,8 @@ statically identifiable objects, e.g., URIs for the REST-specific
 instantiation.  One might be tempted to extend the model towards URI
 templates {{-uri-templates}} (for instance, to open up an
 authorization for many parameter values as in
- `/s/temp{?any*}`), however, that requires some considerations of
+ `/s/temp{?any*}`).
+However, that requires some considerations of
 the ease and unambiguity of matching a given URI against a set of
 templates in an AIF data item.
 
@@ -490,9 +491,10 @@ Provisional registration:
 Registries
 ----------
 
-IANA is requested to create a sub-registry for application/aif+cbor
-and application/aif+json within {{IANA.media-type-sub-parameters}} for
-the two media-type parameters `Toid` and `Tperm`, populated with:
+For the media types application/aif+cbor and application/aif+json,
+IANA is requested to create a sub-registry within
+{{IANA.media-type-sub-parameters}} for the two media-type parameters
+`Toid` and `Tperm`, populated with:
 
 | Parameter | name            | Description/Specification       | Reference |
 |-----------+-----------------+---------------------------------+-----------|
@@ -540,9 +542,9 @@ careful to:
 
 * ensure that the cryptographic armor employed around this format
   fulfills the referencing specification's security objectives, and that the armor or some
-  additional information included in it with the AIF information
+  additional information included in it with the AIF data item
   (1) unambiguously identifies the subject to which the authorizations
-  shall apply and provides (2) any context information needed to derive the
+  shall apply and (2) provides any context information needed to derive the
   identity of the object to which authorization is being granted
   from the object identifiers (such as, for
   the data models defined in the present specification, the scheme and
@@ -551,7 +553,8 @@ careful to:
 * ensure that the types used for `Toid` and `Tperm` provide the
   appropriate granularity and precision so that application requirements on the
   precision of the authorization information are fulfilled, and that
-  all parties understand `Toid`/`Tperm` pairs to signify the same operations.
+  all parties have the same understanding of each Toid/Tperm pair in
+  terms of specified objects (resources) and operations on those.
 
 For the data formats, the security considerations of {{-json}} and
 {{-cbor}} apply.
