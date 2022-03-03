@@ -512,12 +512,16 @@ Content-Formats" sub-registry, within the "Constrained RESTful
 Environments (CoRE) Parameters" Registry {{IANA.core-parameters}}, as
 follows:
 
-| Media Type           | Content Coding | ID   | Reference |
+| Content-Type         | Content Coding | ID   | Reference |
 | application/aif+cbor | -              | TBD1 | RFC XXXX  |
 | application/aif+json | -              | TBD2 | RFC XXXX  |
 {: align="left"}
 
 // RFC Ed.: please replace TBD1 and TBD2 with assigned IDs and remove this note.
+
+In the registry as defined by {{Section 12.3 of -coap}} at the time of
+writing, the column "Content-Type" is called "Media type" and the
+column "Content Coding" is called "Encoding".
 
 Note that applications that register `Toid` and `Tperm` values are
 encouraged to also register Content-Formats for the relevant
