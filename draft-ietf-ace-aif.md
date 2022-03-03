@@ -204,8 +204,8 @@ authorization for many parameter values as in
 the ease and unambiguity of matching a given URI against a set of
 templates in an AIF data item.
 
-This simple information model also does not allow further
-conditionalizing access based on state outside the identification of
+This simple information model also does not allow expressing
+conditionalized access based on state outside the identification of
 objects (e.g., "opening a door is allowed if that is not locked").
 
 Finally, the model does not provide any special access for a set of
@@ -597,5 +597,5 @@ Director, and indeed is responsible for much improvement in the document.
  -->
 <!--  LocalWords:  AIF unambiguity conditionalizing JSON CBOR
  -->
-<!--  LocalWords:  optimizations instantiation
+<!--  LocalWords:  optimizations instantiation conditionalized
  -->
