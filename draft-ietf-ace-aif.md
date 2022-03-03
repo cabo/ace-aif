@@ -202,7 +202,7 @@ templates {{-uri-templates}} (for instance, to open up an
 authorization for many parameter values as in
  `/s/temp{?any*}`), however, that requires some considerations of
 the ease and unambiguity of matching a given URI against a set of
-templates in an AIF object.
+templates in an AIF data item.
 
 This simple information model also does not allow further
 conditionalizing access based on state outside the identification of
