@@ -266,7 +266,8 @@ The permission set is specialized to a single number by the following steps:
 * The (non-dynamic) methods in the permission sets are converted into
   their CoAP method numbers, minus 1.
 * Dynamic-X permissions are converted into what the number would have
-  been for X, plus a Dynamic-Offset chosen as 32 (e.g., 35 for Dynamic-DELETE).
+  been for X, plus a Dynamic-Offset chosen as 32 (e.g., 35 is the
+  number for Dynamic-DELETE as the number for DELETE is 3).
 * The set of numbers is converted into a single number by taking each
   number to the power of two and computing the inclusive OR of the
   binary representations of all the power values.
