@@ -531,7 +531,7 @@ The security considerations of {{-coap}} apply.
 Some wider issues are discussed in {{-seccons}}.
 
 The semantics of the authorization information defined in this
-documents are that of an *allow-list*:
+document are that of an *allow-list*:
 everything is denied until it is explicitly allowed.
 
 When applying these formats, the referencing specification needs to be
