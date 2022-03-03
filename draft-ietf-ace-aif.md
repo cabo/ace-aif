@@ -259,7 +259,7 @@ authorization as per {{rest-model}} and {{ext-rest-model}}.
 As discussed, in this case the object identifier is specialized as a text string
 giving a relative URI (local-part as absolute path on the server
 serving as enforcement point).
-The permission set is specialized to a single number by the following steps:
+The permission set is specialized to a single number `REST-method-set` by the following steps:
 
 * The entries in the table that specify the same local-part are merged
   into a single entry that specifies the union of the permission sets.
@@ -267,7 +267,7 @@ The permission set is specialized to a single number by the following steps:
   their CoAP method numbers, minus 1.
 * Dynamic-X permissions are converted into what the number would have
   been for X, plus a Dynamic-Offset chosen as 32 (e.g., 35 for Dynamic-DELETE).
-* The set of numbers is converted into a single number by taking each
+* The set of numbers is converted into a single number `REST-method-set` by taking each
   number to the power of two and computing the inclusive OR of the
   binary representations of all the power values.
 
@@ -285,9 +285,9 @@ In {{aif-cddl}}, a straightforward specification of the data model
 {{-cddl}} {{-cddlplus}}:
 
 ~~~~ cddl
-AIF-REST = AIF-Generic<path, permissions>
-path = tstr   ; URI relative to enforcement point
-permissions = uint .bits methods
+AIF-REST = AIF-Generic<local-path, REST-method-set>
+local-path = tstr   ; URI relative to enforcement point
+REST-method-set = uint .bits methods
 methods = &(
   GET: 0
   POST: 1
@@ -339,7 +339,8 @@ Media Types
 This specification defines media types for the generic information
 model, expressed in JSON (`application/aif+json`) or in CBOR (`application/aif+cbor`).  These media types have
 parameters for specifying `Toid` and `Tperm`; default values are the
-values "local-uri" for `Toid` and "REST-method-set" for `Tperm`.
+values "local-part" for `Toid` and "REST-method-set" for `Tperm`, as
+per {{data-model}} of the present specification.
 
 A specification that wants to use Generic AIF with different `Toid`
 and/or `Tperm` is expected to request these as media type parameters
@@ -379,7 +380,7 @@ Optional parameters:
 : * `Toid`: the identifier for the object for which permissions are
     supplied.
     A value from the media-type parameter sub-registry for `Toid`.
-    Default value: "local-uri" (RFC XXXX).
+    Default value: "local-part" (RFC XXXX).
 
   * `Tperm`: the data type of a permission set for the object
     identified via a `Toid`.
@@ -440,7 +441,7 @@ Optional parameters:
 : * `Toid`: the identifier for the object for which permissions are
     supplied.
     A value from the media-type parameter sub-registry for `Toid`.
-    Default value: "local-uri" (RFC XXXX).
+    Default value: "local-part" (RFC XXXX).
 
   * `Tperm`: the data type of a permission set for the object
     identified via a `Toid`.
