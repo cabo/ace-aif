@@ -165,7 +165,7 @@ parts of the URI that identify the server ("authority" in
 {{-uri}}) are what are authenticated during REST resource access ({{Section
 4.2.2 of -http-semantics}} and {{Section 6.2 of RFC7252}}), they
 naturally fall into the realm handled by the cryptographic armor; we therefore focus on
-the "path" ("path-abempty") and "query" parts of the URI (URI "local-part" in
+the "path" ("path-abempty") and "query" parts of the URI (*URI-local-part* in
 this specification, as expressed by the Uri-Path and Uri-Query options
 in CoAP).  As a consequence, AIF MUST be used in a way that it is
 clear who is the target (enforcement point) of these authorizations
@@ -177,7 +177,7 @@ For the permissions (`Tperm`), we use a simple permissions model that
 lists the subset of the REST (CoAP or HTTP) methods permitted.
 This model is summarized in {{im-example}}.
 
-| local-part | Permission Set |
+| URI-local-part | Permission Set |
 | /s/temp    | GET            |
 | /a/led     | PUT, GET       |
 | /dtls      | POST           |
@@ -230,7 +230,7 @@ which the subject had access.)
 In other words, it addresses an important subset of the third
 limitation mentioned in {{limitations}}.
 
-| local-part     | Permission Set                    |
+| URI-local-part     | Permission Set                    |
 | /a/make-coffee | POST, Dynamic-GET, Dynamic-DELETE |
 {: #im-example-dynamic title="An authorization instance in the AIF Information Model"}
 
@@ -258,18 +258,18 @@ information model given above.
 In this section, we will give the data model for simple REST
 authorization as per {{rest-model}} and {{ext-rest-model}}.
 As discussed, in this case the object identifier is specialized as a text string
-giving a relative URI (local-part as absolute path on the server
+giving a relative URI (URI-local-part as absolute path on the server
 serving as enforcement point).
-The permission set is specialized to a single number by the following steps:
+The permission set is specialized to a single number `REST-method-set` by the following steps:
 
-* The entries in the table that specify the same local-part are merged
+* The entries in the table that specify the same URI-local-part are merged
   into a single entry that specifies the union of the permission sets.
 * The (non-dynamic) methods in the permission sets are converted into
   their CoAP method numbers, minus 1.
 * Dynamic-X permissions are converted into what the number would have
   been for X, plus a Dynamic-Offset chosen as 32 (e.g., 35 is the
   number for Dynamic-DELETE as the number for DELETE is 3).
-* The set of numbers is converted into a single number by taking each
+* The set of numbers is converted into a single number `REST-method-set` by taking each
   number to the power of two and computing the inclusive OR of the
   binary representations of all the power values.
 
@@ -287,9 +287,9 @@ In {{aif-cddl}}, a straightforward specification of the data model
 {{-cddl}} {{-cddlplus}}:
 
 ~~~~ cddl
-AIF-REST = AIF-Generic<path, permissions>
-path = tstr   ; URI relative to enforcement point
-permissions = uint .bits methods
+AIF-REST = AIF-Generic<local-path, REST-method-set>
+local-path = tstr   ; URI relative to enforcement point
+REST-method-set = uint .bits methods
 methods = &(
   GET: 0
   POST: 1
@@ -341,7 +341,8 @@ Media Types
 This specification defines media types for the generic information
 model, expressed in JSON (`application/aif+json`) or in CBOR (`application/aif+cbor`).  These media types have
 parameters for specifying `Toid` and `Tperm`; default values are the
-values "local-uri" for `Toid` and "REST-method-set" for `Tperm`.
+values "URI-local-part" for `Toid` and "REST-method-set" for `Tperm`, as
+per {{data-model}} of the present specification.
 
 A specification that wants to use Generic AIF with different `Toid`
 and/or `Tperm` is expected to request these as media type parameters
@@ -381,7 +382,7 @@ Optional parameters:
 : * `Toid`: the identifier for the object for which permissions are
     supplied.
     A value from the media-type parameter sub-registry for `Toid`.
-    Default value: "local-uri" (RFC XXXX).
+    Default value: "URI-local-part" (RFC XXXX).
 
   * `Tperm`: the data type of a permission set for the object
     identified via a `Toid`.
@@ -442,7 +443,7 @@ Optional parameters:
 : * `Toid`: the identifier for the object for which permissions are
     supplied.
     A value from the media-type parameter sub-registry for `Toid`.
-    Default value: "local-uri" (RFC XXXX).
+    Default value: "URI-local-part" (RFC XXXX).
 
   * `Tperm`: the data type of a permission set for the object
     identified via a `Toid`.
@@ -497,8 +498,8 @@ IANA is requested to create a sub-registry within
 `Toid` and `Tperm`, populated with:
 
 | Parameter | name            | Description/Specification       | Reference |
-|-----------+-----------------+---------------------------------+-----------|
-| Toid      | local-part      | local-part of URI               | RFC XXXX  |
+|-----------|-----------------|---------------------------------|-----------|
+| Toid      | URI-local-part  | local-part of URI               | RFC XXXX  |
 | Tperm     | REST-method-set | set of REST methods represented | RFC XXXX  |
 {: align="left"}
 
@@ -534,7 +535,7 @@ The security considerations of {{-coap}} apply.
 Some wider issues are discussed in {{-seccons}}.
 
 The semantics of the authorization information defined in this
-documents are that of an *allow-list*:
+document are that of an *allow-list*:
 everything is denied until it is explicitly allowed.
 
 When applying these formats, the referencing specification needs to be
