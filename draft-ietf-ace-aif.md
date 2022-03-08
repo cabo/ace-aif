@@ -136,7 +136,7 @@ authorizations is unambiguously identified (e.g., as part of the armor
 around it).
 
 The generic model of such a capability list is a list of pairs of
-object identifiers and the permissions the subject has on the
+object identifiers (of type `Toid`) and the permissions (of type `Tperm`) the subject has on the
 object(s) identified.
 
 ~~~ cddl
