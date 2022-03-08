@@ -269,8 +269,8 @@ The permission set is specialized to a single number `REST-method-set` by the fo
 * Dynamic-X permissions are converted into what the number would have
   been for X, plus a Dynamic-Offset chosen as 32 (e.g., 35 is the
   number for Dynamic-DELETE as the number for DELETE is 3).
-* The set of numbers is converted into a single number `REST-method-set` by taking each
-  number to the power of two and computing the inclusive OR of the
+* The set of numbers is converted into a single number `REST-method-set` by taking two to the
+  power of each (decremented) method number and computing the inclusive OR of the
   binary representations of all the power values.
 
 This data model could be interchanged in the JSON
