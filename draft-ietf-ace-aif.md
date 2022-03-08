@@ -129,7 +129,7 @@ For the purposes of this specification, the underlying access control model
 will be that of an access matrix, which gives a set of permissions for
 each possible combination of a subject and an object.
 We are focusing the AIF data item on a single row in the access matrix
-(such a row traditionally is also called a capability list), without
+(such a row has often been called a capability list), without
 concern to the subject for which the data item is issued.
 As a consequence, AIF MUST be used in a way that the subject of the
 authorizations is unambiguously identified (e.g., as part of the armor
