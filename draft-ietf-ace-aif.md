@@ -230,18 +230,19 @@ which the subject had access.)
 In other words, it addresses an important subset of the third
 limitation mentioned in {{limitations}}.
 
-| URI-local-part     | Permission Set                    |
+| URI-local-part | Permission Set                    |
 | /a/make-coffee | POST, Dynamic-GET, Dynamic-DELETE |
 {: #im-example-dynamic title="An authorization instance in the AIF Information Model"}
 
 For a method X, the presence of a Dynamic-X permission means that the subject
 holds permission to exercise the method X on resources that have been
-returned in a 2.01 (201) response by a Location-indicating mechanism to a request that the
-subject made to the resource listed (`/a/make-coffee` in the example
-shown in {{im-example-dynamic}},
-which might return the location of a resource that allows GET to find
-out about the status and DELETE to cancel the coffee-making
-operation).
+returned in a 2.01 (201 Created) response by a Location-indicating mechanism to a request that the
+subject made to the resource listed.
+In the example shown in {{im-example-dynamic}}, POST operations on
+`/a/make-coffee` might return the location of a resource dynamically
+created on the coffee machine that allows GET to find
+out about the status of, and DELETE to cancel, the coffee-making
+operation.
 
 Since the use of the extension defined in this section can be detected
 by the mentioning of the Dynamic-X permissions, there is no need for
