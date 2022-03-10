@@ -382,7 +382,7 @@ Subtype name:
 : aif+cbor
 
 Required parameters:
-: none
+: N/A
 
 Optional parameters:
 : * `Toid`: the identifier for the object for which permissions are
@@ -443,7 +443,7 @@ Subtype name:
 : aif+json
 
 Required parameters:
-: none
+: N/A
 
 Optional parameters:
 : * `Toid`: the identifier for the object for which permissions are
