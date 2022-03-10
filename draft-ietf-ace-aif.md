@@ -130,6 +130,10 @@ that are cryptographically secured (or transmitted in a secure way).
 This section discusses the information model underlying the payload of
 that data (as opposed to the cryptographic armor around it).
 
+The semantics of the authorization information defined in this
+document are that of an *allow-list*:
+everything is denied until it is explicitly allowed.
+
 For the purposes of this specification, the underlying access control model
 will be that of an access matrix, which gives a set of permissions for
 each possible combination of a subject and an object.
@@ -559,10 +563,6 @@ The security considerations of {{-coap}} apply when AIF is used with
 CoAP, and, if complex formats such as URIs are used for `Toid` or
 `Tperm`, specifically {{Section 11.1 of -coap}}.
 Some wider issues are discussed in {{-seccons}}.
-
-The semantics of the authorization information defined in this
-document are that of an *allow-list*:
-everything is denied until it is explicitly allowed.
 
 When applying these formats, the referencing specification needs to be
 careful to:
