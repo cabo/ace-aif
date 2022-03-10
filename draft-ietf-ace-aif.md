@@ -536,7 +536,9 @@ combinations.
 Security Considerations {#seccons}
 =======================
 
-The security considerations of {{-coap}} apply.
+The security considerations of {{-coap}} apply when AIF is used with
+CoAP, and, if complex formats such as URIs are used for `Toid` or
+`Tperm`, specifically {{Section 11.1 of -coap}}.
 Some wider issues are discussed in {{-seccons}}.
 
 The semantics of the authorization information defined in this
