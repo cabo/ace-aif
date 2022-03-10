@@ -42,6 +42,7 @@ normative:
   RFC7252: coap
   I-D.ietf-httpbis-semantics: http-semantics
   RFC8126: ianacons
+  RFC6838: media-type-reg
   RFC8610: cddl
   RFC9165: cddlplus
 
@@ -59,6 +60,10 @@ informative:
   RFC7228: term
   IANA.core-parameters:
   IANA.media-type-sub-parameters:
+  KebabCase:
+    target: http://wiki.c2.com/?KebabCase
+    title: KebabCase
+    date: 2014-08-29
 
 --- abstract
 
@@ -506,8 +511,22 @@ IANA is requested to create a sub-registry within
 
 The registration policy is Specification required {{-ianacons}}.
 The designated expert will engage with the submitter to ascertain the
-requirements of this document are addressed.
+requirements of this document are addressed:
 
+* The specifications for `Toid` and `Tperm` need to realize the
+  general ideas of unambiguous object identifiers and permission lists
+  in the context where the AIF data item is intended to be used, and
+  their structure needs to be usable with the intended media types
+  (application/aif+cbor and application/aif+json) as identified in the
+  specification.
+
+* The parameter names need to conform to {{Section 4.3 of
+  -media-type-reg}}, but preferably are in {{KebabCase}} so they can
+  easily be translated into names used in popular programming
+  language APIs.
+
+The designated experts will develop further criteria and guidelines as
+needed.
 
 Content-Format
 --------------
