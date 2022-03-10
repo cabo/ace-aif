@@ -237,7 +237,7 @@ limitation mentioned in {{limitations}}.
 
 | URI-local-part | Permission Set                    |
 | /a/make-coffee | POST, Dynamic-GET, Dynamic-DELETE |
-{: #im-example-dynamic title="An authorization instance in the AIF Information Model"}
+{: #im-example-dynamic title="An authorization instance in the AIF Information Model With Dynamic Resource Creation"}
 
 For a method X, the presence of a Dynamic-X permission means that the subject
 holds permission to exercise the method X on resources that have been
@@ -370,7 +370,7 @@ IANA is requested to add the following Media-Types to the "Media Types" registry
 | Name     | Template             | Reference                 |
 | aif+cbor | application/aif+cbor | RFC XXXX, {{media-types}} |
 | aif+json | application/aif+json | RFC XXXX, {{media-types}} |
-{: align="left"}
+{: align="left" title="New Media Types"}
 
 For `application/aif+cbor`:
 
@@ -507,7 +507,7 @@ IANA is requested to create a sub-registry within
 |-----------|-----------------|---------------------------------|-----------|
 | Toid      | URI-local-part  | local-part of URI               | RFC XXXX  |
 | Tperm     | REST-method-set | set of REST methods represented | RFC XXXX  |
-{: align="left"}
+{: align="left" title="New Media Type Parameters"}
 
 The registration policy is Specification required {{-ianacons}}.
 The designated expert will engage with the submitter to ascertain the
@@ -539,7 +539,7 @@ follows:
 | Content-Type         | Content Coding | ID   | Reference |
 | application/aif+cbor | -              | TBD1 | RFC XXXX  |
 | application/aif+json | -              | TBD2 | RFC XXXX  |
-{: align="left"}
+{: align="left" title="New Content-Formats"}
 
 // RFC Ed.: please replace TBD1 and TBD2 with assigned IDs and remove this note.
 
