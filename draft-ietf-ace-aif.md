@@ -618,6 +618,8 @@ direction of this document.
 {{{Alexey Melnikov}}} pointed out that there were gaps in the media
 type specifications, and {{{Loganaden Velvindron}}} provided a shepherd
 review with further comments.
+Many thanks also to the IESG reviewers, which provided several small
+but significant observations.
 {{{Benjamin Kaduk}}} provided an extensive review as responsible Area
 Director, and indeed is responsible for much improvement in the document.
 
