@@ -4,8 +4,8 @@
 
 ACE Working Group                                             C. Bormann
 Internet-Draft                                    Universität Bremen TZI
-Intended status: Standards Track                           15 March 2022
-Expires: 16 September 2022
+Intended status: Standards Track                           24 April 2022
+Expires: 26 October 2022
 
 
            An Authorization Information Format (AIF) for ACE
@@ -55,7 +55,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 16 September 2022.
+   This Internet-Draft will expire on 26 October 2022.
 
 Copyright Notice
 
