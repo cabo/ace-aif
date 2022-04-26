@@ -13,21 +13,6 @@
 obsoletes="" version="3">
 
 <!-- xml2rfc v2v3 conversion 3.12.1 -->
-<!-- [rfced] Please note that the title of the document has been updated as
-follows. The abbreviation "ACE" has been expanded per Section 3.6 of RFC
-7322 (“RFC Style Guide”). Please review.
-
-Original:
-   An Authorization Information Format (AIF) for ACE
-
-Current:
-   An Authorization Information Format (AIF) for Authentication and
-   Authorization for Constrained Environments (ACE)
--->
-<!-- [rfced] We note that AIF and ACE are mentioned in the document title but
-not in the abstract. Please review and let us know if any updates are
-needed.
--->
   <front>
     <title abbrev="ACE AIF">An Authorization Information Format (AIF) for Authentication and Authorization for Constrained Environments (ACE)</title>
     <seriesInfo name="RFC" value="9237"/>
@@ -47,8 +32,6 @@ needed.
     <date year="2022" month="April"/>
     <area>sec</area>
     <workgroup>ACE</workgroup>
-
-<!-- [rfced] Please insert any keywords (beyond those that appear in the title) for use on https://www.rfc-editor.org/search. -->
 
 
     <abstract>
@@ -88,16 +71,13 @@ on them, including some provision for dynamically created resources.</t>
       <section anchor="terminology">
         <name>Terminology</name>
 
-<!-- [rfced] Although not required, the text about the RFC 2119 key words
-often appears at the end of the Terminology section. Would you like to
-leave it as is or move it to the end of the section?
--->
-
 	<t>This memo uses terms from the Constrained Application Protocol (CoAP) <xref target="RFC7252"/> and the Internet Security Glossary <xref target="RFC4949"/>; CoAP is used for
 the explanatory examples as it is a good fit for constrained devices.</t>
         <t>The shape of data is specified in Concise Data Definition Language (CDDL) <xref target="RFC8610"/> <xref target="RFC9165"/>.
 Terminology for constrained devices is defined in <xref target="RFC7228"/>.</t>
-        <t>
+<t>The term "byte", abbreviated by "B", is used in its now customary
+sense as a synonym for "octet".</t>
+<t>
 The key words "<bcp14>MUST</bcp14>", "<bcp14>MUST NOT</bcp14>",
 "<bcp14>REQUIRED</bcp14>", "<bcp14>SHALL</bcp14>", "<bcp14>SHALL NOT</bcp14>",
 "<bcp14>SHOULD</bcp14>", "<bcp14>SHOULD NOT</bcp14>",
@@ -107,8 +87,6 @@ interpreted as described in BCP&nbsp;14 <xref target="RFC2119"/> <xref
 target="RFC8174"/> when, and only when, they appear in all capitals, as shown
 here.
         </t>
-<t>The term "byte", abbreviated by "B", is used in its now customary
-sense as a synonym for "octet".</t>
       </section>
     </section>
     <section anchor="information-model">
@@ -150,48 +128,18 @@ AIF-Specific = AIF-Generic<tstr, uint>
       </figure>
       <section anchor="rest-model">
         <name>REST-Specific Model</name>
-<!-- [rfced] May we move the phrase "for the object identifiers (Toid)" to
-appear at the end of the sentence? Also, please confirm that the plural
-"object identifiers" is correct here. 
-
-Original:
-   In the specific instantiation of the REST resources and the
-   permissions on them, for the object identifiers (Toid), we use the
-   URI of a resource on a CoAP server.
-
-Perhaps:
-   In the specific instantiation of the REST resources and the
-   permissions on them, we use the
-   URI of a resource on a CoAP server for the object identifiers (Toid).
--->
-        <t>In the specific instantiation of the REST resources and the
-permissions on them, for the object identifiers (<tt>Toid</tt>), we
-use the URI of a resource on a CoAP server.  More specifically, since the
-parts of the URI that identify the server ("authority" in
-<xref target="RFC3986"/>) are authenticated during REST resource access (<xref section="4.2.2" sectionFormat="of" target="RFC9110"/> and <xref section="6.2" sectionFormat="of" target="RFC7252"/>), they
-naturally fall into the realm handled by the cryptographic armor; we therefore focus on
-the "path" ("path-abempty") and "query" parts of the URI (<em>URI-local-part</em> in
-this specification, as expressed by the Uri-Path and Uri-Query options
-in CoAP).
-
-<!--[rfced] We updated this text slightly for ease of readability
-(i.e., updated "that it is clear who" to "that clearly shows
-who". Please let us know of any objections.
-
-Original:
-  As a consequence, AIF MUST be used in a way that it is clear who is 
-  the target (enforcement point) of these authorizations (note that 
-  there may be more than one target that the same authorization applies 
-  to, e.g., in a situation with homogeneous devices).
-
-Current
-  As a consequence, AIF MUST be used in a way that clearly shows
-  who is the target (enforcement point) of these authorizations (note 
-  that there may be more than one target that the same authorization 
-  applies to, e.g., in a situation with homogeneous devices).
--->
-
-As a consequence, AIF <bcp14>MUST</bcp14> be used in a way that clearly shows 
+      <t>In the specific instantiation of the REST resources and the
+      permissions on them, we use the URI of a resource on a CoAP server for
+      the object identifier (<tt>Toid</tt>).  More specifically, since the
+      parts of the URI that identify the server ("authority" in <xref
+      target="RFC3986"/>) are authenticated during REST resource access (<xref
+      section="4.2.2" sectionFormat="of" target="RFC9110"/> and <xref
+      section="6.2" sectionFormat="of" target="RFC7252"/>), they naturally
+      fall into the realm handled by the cryptographic armor; we therefore
+      focus on the "path" ("path-abempty") and "query" parts of the URI
+      (<em>URI-local-part</em> in this specification, as expressed by the
+      Uri-Path and Uri-Query options in CoAP).
+As a consequence, AIF <bcp14>MUST</bcp14> be used in a way that it is clear
 who is the target (enforcement point) of these authorizations
 (note that there may be more than one target that the same
 authorization applies to, e.g., in a situation with homogeneous
@@ -199,19 +147,8 @@ devices).</t>
         <t>For the permissions (<tt>Tperm</tt>), we use a simple permissions model that
 lists the subset of the REST (CoAP or HTTP) methods permitted.
 This model is summarized in <xref target="im-example"/>.</t>
-<!-- [rfced] Please review these table titles and let us know if any updates
-are needed to "AIF Information Model". We ask because the corresponding
-sections are titled "REST-Specific Model" and "REST-Specific Model with
-Dynamic Resource Creation", respectively.
-
-Current:
-  Table 1: An Authorization Instance in the AIF Information Model
-  ...
-  Table 2: An Authorization Instance in the AIF Information Model
-  with Dynamic Resource Creation
--->
       <table anchor="im-example">
-          <name>An Authorization Instance in the AIF Information Model</name>
+          <name>An Authorization Instance in the REST-Specific AIF Information Model</name>
           <thead>
             <tr>
               <th align="left">URI-local-part</th>
@@ -252,17 +189,9 @@ authorization for many parameter values as in
 However, that requires some considerations of
 the ease and unambiguity of matching a given URI against a set of
 templates in an AIF data item.</t>
-<!-- [rfced] May we update "that is not locked" here to read either "it is not
-locked" or "that door is not locked"?
-
-Original:
-   This simple information model also does not allow expressing
-   conditionalized access based on state outside the identification of
-   objects (e.g., "opening a door is allowed if that is not locked").
--->
 <t>This simple information model also does not allow expressing
 conditionalized access based on state outside the identification of
-objects (e.g., "opening a door is allowed if that is not locked").</t>
+objects (e.g., "opening a door is allowed if it is not locked").</t>
         <t>Finally, the model does not provide any special access for a set of
 resources that are specific to a subject, e.g., that the subject
 created itself by previous operations (PUT, POST, or PATCH/iPATCH <xref target="RFC8132"/>) or that were
@@ -270,20 +199,21 @@ specifically created for the subject by others.</t>
       </section>
       <section anchor="ext-rest-model">
         <name>REST-Specific Model with Dynamic Resource Creation</name>
-        <t>The REST-Specific Model with Dynamic Resource Creation addresses the
-need to provide defined
-access to dynamic resources that were created by the subject itself,
-specifically, a resource that is made known to the subject by
-providing Location-* options in a CoAP response or using the Location
-header field in HTTP <xref target="RFC9110"/> (the Location-indicating mechanisms).
-(The concept is somewhat comparable to "Access Control List (ACL) inheritance" in the Network File System version 4 (NFSv4) protocol
-<xref target="RFC8881"/>, except that it does not use a containment relationship
-but rather the fact that the dynamic resource was created from a resource to
-which the subject had access.)
-In other words, it addresses an important subset of the third
-limitation mentioned in <xref target="limitations"/>.</t>
+        <t>The <em>REST-specific model with dynamic resource creation</em> addresses
+        the need to provide defined access to dynamic resources that were
+        created by the subject itself, specifically, a resource that is made
+        known to the subject by providing Location-* options in a CoAP
+        response or using the Location header field in HTTP <xref
+        target="RFC9110"/> (the Location-indicating mechanisms).  (The concept
+        is somewhat comparable to "Access Control List (ACL) inheritance" in
+        the Network File System version 4 (NFSv4) protocol <xref
+        target="RFC8881"/>, except that it does not use a containment
+        relationship but rather the fact that the dynamic resource was created
+        from a resource to which the subject had access.)  In other words, it
+        addresses an important subset of the third limitation mentioned in
+        <xref target="limitations"/>.</t>
         <table anchor="im-example-dynamic">
-          <name>An Authorization Instance in the AIF Information Model with Dynamic Resource Creation</name>
+          <name>An Authorization Instance in the REST-Specific AIF Information Model with Dynamic Resource Creation</name>
           <thead>
             <tr>
               <th align="left">URI-local-part</th>
@@ -322,32 +252,16 @@ authorization as per Sections <xref target="rest-model" format="counter"/> and <
 As discussed, in this case the object identifier is specialized as a text string
 giving a relative URI (URI-local-part as the absolute path on the server
 serving as the enforcement point).
-The permission set is specialized to a single number <tt>REST-method-set</tt> by the following steps:</t>
+The permission set is specialized to a single number <em>REST-method-set</em> by the following steps:</t>
       <ul spacing="normal">
         <li>The entries in the table that specify the same URI-local-part are merged
 into a single entry that specifies the union of the permission sets.</li>
         <li>The (non-dynamic) methods in the permission sets are converted into
 their CoAP method numbers, minus 1.</li>
-<!-- [rfced] Is "chosen as" correct here? Would "of" be better?
-
-Original:
-   *  Dynamic-X permissions are converted into what the number would
-      have been for X, plus a Dynamic-Offset chosen as 32 (e.g., 35 is
-      the number for Dynamic-DELETE as the number for DELETE is 3).
-
-Similarly, what about "choosing 32 as Dynamic-Offset" here? Would "a
-Dynamic-Offset of 32" or something similar be better?
-
-Original:
-   Note that choosing 32 as Dynamic-Offset means that all future CoAP
-   methods that can be registered can be represented both as themselves
-   and in the Dynamic-X variant, but only the dynamic forms of methods 1
-   to 21 are typically usable in a JSON form [RFC7493].
--->
 <li>Dynamic-X permissions are converted into what the number would have
 been for X, plus a Dynamic-Offset chosen as 32 (e.g., 35 is the
 number for Dynamic-DELETE as the number for DELETE is 3).</li>
-        <li>The set of numbers is converted into a single number <tt>REST-method-set</tt> by taking two to the
+        <li>The set of numbers is converted into a single number REST-method-set by taking two to the
 power of each (decremented) method number and computing the inclusive OR of the
 binary representations of all the power values.</li>
       </ul>
@@ -408,15 +322,15 @@ several optimizations and improvements are possible.</t>
       02                  # unsigned(2)
 ]]></artwork>
       </figure>
-      <t>Note that choosing 32 as Dynamic-Offset means that all future CoAP
+      <t>Note that having chosen 32 as Dynamic-Offset means that all future CoAP
 methods that are registered can be represented both as themselves
-and in the Dynamic-X variant, but only the dynamic forms of methods 1
+and in the Dynamic-X variant, but that only the dynamic forms of methods 1
 to 21 are typically usable in a JSON form <xref target="RFC7493"/>.</t>
     </section>
     <section anchor="media-types">
       <name>Media Types</name>
       <t>This specification defines media types for the generic information
-model, expressed in JSON (<tt>application/aif+json</tt>) or in CBOR (<tt>application/aif+cbor</tt>).  These media types have
+model, expressed in JSON (application/aif+json) or in CBOR (application/aif+cbor).  These media types have
 parameters for specifying <tt>Toid</tt> and <tt>Tperm</tt>; default values are the
 values "URI-local-part" for <tt>Toid</tt> and "REST-method-set" for <tt>Tperm</tt>, as
 per <xref target="data-model"/> of the present specification.</t>
@@ -426,23 +340,6 @@ and/or <tt>Tperm</tt> is expected to request these as media type parameters
     </section>
     <section anchor="iana-considerations">
       <name>IANA Considerations</name>
-
-<!-- [rfced] FYI: In the media type registration entries in Section 5.1, we
-updated "none" to "N/A" per Section 5.6 of RFC 6838, which states:
-
-   "N/A", written exactly that way, can be used in any field if desired
-   to emphasize the fact that it does not apply or that the question was
-   not omitted by accident.  Do not use 'none' or other words that could
-   be mistaken for a response.
--->
-<!-- [rfced] We note that spacing="compact" was used for the media type
-registration entries in Section 5.1. However, spacing="normal" is more
-typical for these (see examples in RFCS 8866 and 8801). When we updated
-to spacing="normal", the two entries ran together; thus, we put each
-entry in a new subsection (i.e., Section 5.1.1 for application/aif+cbor
-and Section 5.1.2 for application/aif+json). Please review and let us
-know any objections.
--->
       <section anchor="media-types-1">
         <name>Media Types</name>
         <t>IANA has added the following media types to the "Media Types" registry. The registration entries are in the following subsections.</t>
@@ -672,23 +569,9 @@ in the context where the AIF data item is intended to be used, and
 their structure needs to be usable with the intended media types
 (application/aif+cbor and application/aif+json) as identified in the
 specification.</li>
-<!-- [rfced] Please review "popular programming language APIs". Would updating
-to "APIs for popular programming language" make this phrase easier to read?
-
-Original:
-   *  The parameter names need to conform to Section 4.3 of [RFC6838],
-      but preferably are in [KebabCase] so they can easily be translated
-      into names used in popular programming language APIs.
-      
-Perhaps:
-   *  The parameter names need to conform to Section 4.3 of [RFC6838],
-      but preferably they are in [KebabCase] so they can easily be 
-      translated into names used in APIs for popular programming 
-      languages.      
--->
-<li>The parameter names need to conform to <xref section="4.3" sectionFormat="of" target="RFC6838"/>, but preferably are in <xref target="KebabCase"/> so they can be
-easily translated into names used in popular programming
-language APIs.</li>
+<li>The parameter names need to conform to <xref section="4.3" sectionFormat="of" target="RFC6838"/>, but preferably they are in <xref target="KebabCase"/> so they can be easily
+ translated into names used in APIs with popular programming
+language.</li>
         </ul>
         <t>The designated experts will develop further criteria and guidelines as
 needed.</t>
@@ -703,8 +586,8 @@ follows:</t>
           <name>New Content-Formats</name>
           <thead>
             <tr>
-              <th align="left">Content-Type</th>
-              <th align="left">Content Coding</th>
+              <th align="left">Media Type</th>
+              <th align="left">Encoding</th>
               <th align="left">ID</th>
               <th align="left">Reference</th>
             </tr>
@@ -724,23 +607,6 @@ follows:</t>
             </tr>
           </tbody>
         </table>
-
-<!--[rfced] In Section 5.3, we notice that the headers for Table 5 are
-different than the headers in the "CoAP Content-Formats”
-subregistry, and this variance is pointed out in the text below.
-Should the headers in Table 5 perhaps match the current headers
-in the registry? Please clarify why different header names were
-used.
-
-Original:
-  In the registry as defined by Section 12.3 of [RFC7252] at the time  
-  of writing, the column "Content-Type" is called "Media type" and the  
-  column "Content Coding" is called "Encoding”.
--->
-	
-        <t>In the registry as defined by <xref section="12.3" sectionFormat="of" target="RFC7252"/> at the time of
-writing, the column "Content-Type" is called "Media type" and the
-column "Content Coding" is called "Encoding".</t>
         <t>Note that applications that register <tt>Toid</tt> and <tt>Tperm</tt> values are
 encouraged to also register Content-Formats for the relevant
 combinations.</t>
@@ -748,22 +614,11 @@ combinations.</t>
     </section>
     <section anchor="seccons">
       <name>Security Considerations</name>
-<!-- [rfced] May we update this sentence as follows for clarity?
-
-Original:
-   The security considerations of [RFC7252] apply when AIF is used with
-   CoAP, and, if complex formats such as URIs are used for Toid or
-   Tperm, specifically Section 11.1 of [RFC7252].
-
-Perhaps:
-   The security considerations of [RFC7252] apply when AIF is used with
-   CoAP; Section 11.1 of [RFC7252] specifically applies if complex
-   formats such as URIs are used for Toid or Tperm.
--->
-      <t>The security considerations of <xref target="RFC7252"/> apply when AIF is used with
-CoAP, and, if complex formats such as URIs are used for <tt>Toid</tt> or
-<tt>Tperm</tt>, specifically <xref section="11.1" sectionFormat="of" target="RFC7252"/>.
-Some wider issues are discussed in <xref target="RFC8576"/>.</t>
+      <t>The security considerations of <xref target="RFC7252"/> apply when
+      AIF is used with CoAP; <xref section="11.1" sectionFormat="of"
+      target="RFC7252"/> specifically applies if complex formats such as URIs
+      are used for <tt>Toid</tt> or <tt>Tperm</tt>.  Some wider issues are
+      discussed in <xref target="RFC8576"/>.</t>
       <t>When applying these formats, the referencing specification needs to be
 careful to ensure that:</t>
       <ul spacing="normal">
@@ -779,21 +634,21 @@ authority information that is used to construct the full URI), and</li>
         <li>the types used for <tt>Toid</tt> and <tt>Tperm</tt> provide the
 appropriate granularity and precision so that application requirements on the
 precision of the authorization information are fulfilled and that
-all parties have the same understanding of each Toid/Tperm pair in
+all parties have the same understanding of each <tt>Toid</tt>/<tt>Tperm</tt> pair in
 terms of specified objects (resources) and operations on those.</li>
       </ul>
       <t>For the data formats, the security considerations of <xref target="RFC8259"/> and
 <xref target="RFC8949"/> apply.</t>
       <t>A plain implementation of AIF might implement just the basic REST
 model as per <xref target="rest-model"/>.  If it receives authorizations that
-include permissions that use the REST-Specific Model with Dynamic
-Resource Creation (<xref target="ext-rest-model"/>), it needs to either
+include permissions that use the REST-specific model with dynamic
+resource creation (<xref target="ext-rest-model"/>), it needs to either
 reject the AIF data item entirely or act only on the
 permissions that it does understand.
 In other words, the semantics underlying an allow-list as discussed
 above need to hold here as well.</t>
-      <t>An implementation of the REST-Specific Model with Dynamic Resource
-Creation (<xref target="ext-rest-model"/>) needs to carefully keep track of the
+      <t>An implementation of the REST-specific model with dynamic resource
+creation (<xref target="ext-rest-model"/>) needs to carefully keep track of the
 dynamically created objects and the subjects to which the Dynamic-X
 permissions apply -- both on the server side to enforce the permissions
 and on the client side to know which permissions are available.</t>
@@ -928,70 +783,4 @@ but significant observations.
 Director and indeed is responsible for much improvement in the document.</t>
     </section>
   </back>
-<!-- [rfced] Terminology
-
-a) We updated "Constrained Devices" (capitalized) to "constrained devices"
-(lowercase) per usage in RFC 7228. Aside from the usage in RFC 7228, the
-lowercase form is also more common in the RFC Series as a whole. Please let us
-know any objections.
-
-
-b) We see both of the following forms in the document. Please review each
-instance and let us know if any updates are needed.
-
-location vs. Location
-
-
-c) Does the following need to be capitalized in running text?
-
-Current:
-   REST-Specific Model with Dynamic Resource Creation
-
-Perhaps:
-   REST-specific model with dynamic resource creation
--->
-
-<!-- [rfced] Please review the "Inclusive Language" portion of the online 
-Style Guide <https://www.rfc-editor.org/styleguide/part2/#inclusive_language>
-and let us know if any changes are needed. -->
-
-<!-- [rfced] XML Formatting
-     
-a) We note that URI-local-part appears in several ways: with quotation marks,
-with no quotation marks, and in italics/underscores (i.e., <em> in xml). In
-addition, we see that REST-method-set appears with quotation marks in some
-instances and in fixed-width font (i.e., <tt> in xml) in others. Should the
-formatting of these terms be consistent? Let us know if any updates are
-needed.
-
-URI-local-part
-REST-method-set
-
-
-b) The document has two instances of "allow-list". One is enclosed in <em> in
-the xml but the other is not. Should this be consistent? If so, please let us
-know which form is preferred. 
-
-
-c) In the xml file, <tt> is used consistently for Toid and Tperm in general
-text. Should <tt> also be used for "Toid/Tperm" in the following sentence?
-
-Original:
-   ...that all parties have the same understanding of
-   each Toid/Tperm pair in terms of specified objects (resources) and
-   operations on those.
-
-
-d) The following appear both with and without <tt> in the xml file. Should
-this be consistent? If so, please let us know which form to use.
-
-application/aif+json
-application/aif+cbor
-
-
-e) A question about the use of <tt> was sent on 28 February 2022 to all
-authors of documents in cluster 442. It seems that the cluster authors decided
-to use <tt> for claims and parameters. Please let us know if any updates are
-needed for this document to correspond with that cluster-wide decision.
--->
 </rfc>
